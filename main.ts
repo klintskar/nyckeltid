@@ -19,5 +19,8 @@ basic.forever(function () {
     if (keyTime > 0) {
         control.waitMicros(10 ** 6 * 60)
         keyTime += -1
+        if (keyTime <= 0) {
+        	
+        }
     }
 })
