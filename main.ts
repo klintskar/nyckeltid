@@ -1,21 +1,26 @@
 let keyTimeVar = 0
 let Time = 0
 let keyTime = 0
-input.onGesture(Gesture.ScreenDown, function () {
+function keyTimeSkift () {
     if (keyTimeVar < 10) {
         keyTimeVar += 1
     } else {
         keyTimeVar = 0
     }
+}
+input.onGesture(Gesture.ScreenDown, function () {
+    keyTimeSkift()
 })
 function timeCalc (num: number) {
     Time = 3 / 4 * 2 ** num
     return Time
 }
-basic.forever(function () {
-    basic.showNumber(keyTime)
+radio.onReceivedValue(function (name, value) {
+    if (name == "time") {
+        keyTime = value
+    }
 })
-basic.forever(function () {
+function countDown () {
     if (keyTime > 0) {
         control.waitMicros(10 ** 6 * 60)
         keyTime += -1
@@ -23,4 +28,10 @@ basic.forever(function () {
         	
         }
     }
+}
+basic.forever(function () {
+	
+})
+basic.forever(function () {
+    countDown()
 })
